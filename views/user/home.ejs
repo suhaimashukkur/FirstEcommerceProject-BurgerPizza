@@ -1,0 +1,779 @@
+<%- include('../partials/user/userHeader.ejs') %>
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+  <head> </head>
+
+  <body>
+     
+   
+
+  <!-- Breadcrumb Section Begin -->
+   <section class="breadcrumb-section set-bg" data-setbg="data:image/jpeg;base64,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" alt="">
+                    "> 
+<div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <div class="breadcrumb__text text-black">
+                    <br><br>
+                      <h2 >Our Menu</h2>
+                      <div class="breadcrumb__option">
+                        <form id="search-form" class="search-form" style=" padding-left: 900px;display: flex; ">
+                          <input id="search-input" type="text" name="query" placeholder="Search products..." class="form-control mr-2" style="width: 300px;">
+                          <button type="submit" id="search-button" style="padding: 10px; background-color: #151414; color: #fff; border: none; border-radius: 5px; height: 40px; width: 50px;"><i class="fa fa-search"></i></button>
+                        </form>
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div> 
+  </section> 
+  <!-- Breadcrumb Section End -->
+
+     <!-- Checkout Section Begin -->
+     
+    
+    <section class="featured spad" style="margin: 20px;">
+   
+       <!-- Search Section -->
+      
+      
+      <div class="container">
+        <div class="row">
+          
+          <!-- Sorting and Filtering Options in a Card -->
+          <div class="col-lg-2">
+            <div class="card border">
+              <div class="card-body">
+                
+              <div>
+                <div class="sort-options">
+                  <label for="sortOptions" style="font-weight:500;"><spam class="text-danger">Sort</spam> <spam> </spam>Products</label>
+                </div>
+                  <select id="sortOptions" onchange="sortProducts()">
+                    <option value="name">Name</option>
+                    <option value="price">Price</option>
+                    <!-- Add more options as needed -->
+                  </select>
+                  <label for="categoryFilter" style="font-weight: 500;"><spam class="text-danger">Category</spam> <spam> </spam>Filter</label>
+                  <select id="categoryFilter" onchange="filterProducts()">
+                    <option value="">All</option>
+                    <!-- Populate options dynamically from backend -->
+                    <% category.forEach(cat => { %>
+                      <option value="<%= cat._id %>"><%= cat.categoryName %></option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Product Display in Another Card -->
+          <div class="col-lg-10">
+            <div class="card border">
+              <div class="card-body">
+               
+    
+                <!-- Product Display -->
+                <div class="row border-left pl-4" id="search-results">
+                  <!-- Product display goes here -->
+                  <% product.forEach(product => { %>
+                    <div class="col-lg-3 col-md-4 col-sm-6 g-4 pl-4 ">
+                      <div class="card mb-4 h-100 ">
+                        <img src="/uploads/<%= product.image1 %>" class="card-img-top img-fluid" alt="Product Image" style="height: 200px; object-fit: cover;">
+                        <div class="card-body ">
+                          <ul class="list-unstyled d-flex justify-content-between align-items-center">
+                            <li>
+                              <a href="/addToCart/<%= product._id %>"><i class="fa fa-heart text-danger"></i></a>
+                            </li>
+                            <li>
+                              <a href="#"><i class="fa fa-retweet text-danger"></i></a>
+                            </li>
+                            <li>
+                              <a href="#"><i class="fa fa-shopping-cart text-danger"></i></a>
+                            </li>
+                          </ul>
+                          <h5 class="card-title">
+                            <a href="/single-product/<%= product._id %>" style="color: #dd1d1d;justify-content: center;font-weight: 700;"><%= product.name %></a>
+                          </h5>
+                          <h6 style="font-weight: 700;">Rs: <%= product.price %>/-</h6>
+                        </div>
+                      </div>
+                    </div>
+                  <% }) %>
+                  
+                </div>
+                <br><br>
+    
+                <!-- Pagination -->
+                <div class="row">
+                  <div class="col-lg-12">
+                    <nav class="pagination-container">
+                      <button class="pagination-button btn btn-danger" id="prev-button" title="Previous page" aria-label="Previous page">
+                        &lt;
+                      </button>
+                      <div id="pagination-numbers"></div>
+                      <button class="pagination-button btn btn-danger" id="next-button" title="Next page" aria-label="Next page">
+                        &gt;
+                      </button>
+                    </nav>
+                    <style>
+                      .pagination-container {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                      }
+                      .pagination-button {
+                        padding: 10px;
+                        /* Add your button styles here */
+                      }
+                    </style>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+
+
+
+
+    
+
+
+
+
+    
+   
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+              const searchForm = document.getElementById('search-form');
+              const searchInput = document.getElementById('search-input');
+              const searchResults = document.getElementById('search-results');
+            
+              searchForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+            
+                const query = searchInput.value.trim(); // Trim the search query
+            
+                fetch('/product-search', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ payload: query })
+                })
+                .then(res => res.json())
+                .then(data => {
+                  console.log(data.payload);
+                  // Clear previous search results
+                  searchResults.innerHTML = '';
+            
+                  // Display search results
+                  data.payload.forEach(product => {
+                    const productElement = document.createElement('div');
+                    productElement.classList.add('col-lg-3', 'col-md-4', 'col-sm-6', 'g-4');
+                    productElement.innerHTML = `
+                      <div class="card mb-4 h-100">
+                        <img src="/uploads/${product.image1}" class="card-img-top img-fluid" alt="Product Image" style="height: 200px; object-fit: cover;">
+                        <!-- Add other product details -->
+                        <br><br>
+                        <h5 class="card-title">
+                          <a href="/single-product/${product._id}" style="color: #dd1d1d;justify-content: center;font-weight: 700;">${product.name}</a>
+                        </h5>
+                        <h6 style="font-weight: 700;">Price: Rs. ${product.price}/-</h6>
+                      </div>
+                    `;
+                    searchResults.appendChild(productElement);
+                  });
+            
+                  // Clear search input after search
+                  searchInput.value = '';
+                })
+                .catch(error => console.error('Error:', error));
+              });
+              
+            </script>
+          <!-- <script>
+            const searchForm = document.getElementById('search-form');
+            const searchResults = document.getElementById('search-results');
+        
+            searchForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+        
+                const formData = new FormData(searchForm);
+                const query = formData.get('query');
+        
+                fetch('/product-search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ payload: query })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data.payload);
+                    // Clear previous search results
+                    searchResults.innerHTML = '';
+        
+                    // Display search results
+                    data.payload.forEach(product => {
+                        const productElement = document.createElement('div');
+                        productElement.classList.add('col-lg-3', 'col-md-4', 'col-sm-6', 'g-4');
+                        productElement.innerHTML = `
+                            <div class="card mb-4 h-100">
+                                <img src="/uploads/${product.image1}" class="card-img-top img-fluid" alt="Product Image" style="height: 200px; object-fit: cover;">
+                                
+                                <br><br>
+                                <h5 class="card-title">
+                          <a href="/single-product/${ product._id }" style="color: #dd1d1d;justify-content: center;font-weight: 700;">${product.name}</a>
+                        </h5>
+                                
+                                <h6 style="font-weight: 700;">Price: Rs. ${product.price}/-</h6>
+                            </div>
+                        `;
+                        searchResults.appendChild(productElement);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        </script> -->
+
+<script>
+function filterProducts() {
+  const productList = document.getElementById('search-results');
+  const filterOption = document.getElementById('categoryFilter').value;
+
+  fetch(`/product-filter?category=${filterOption}`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(res => res.json())
+    .then(data => {
+      productList.innerHTML = ''; // Clear existing content
+
+      data.payload.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.classList.add('col-lg-3', 'col-md-4', 'col-sm-6', 'g-4');
+
+        productCard.innerHTML = `
+          <div class="card mb-4 h-100">
+            <img src="/uploads/${product.image1}" class="card-img-top img-fluid" alt="Product Image" style="height: 200px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="/single-product/${product._id}" style="color: #dd1d1d; justify-content: center; font-weight: 700;">${product.name}</a>
+              </h5>
+              <h6 style="font-weight: 700;">Price: Rs. ${product.price}/-</h6>
+            </div>
+          </div>
+        `;
+
+        productList.appendChild(productCard);
+      });
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+
+</script>
+
+
+        <script>
+        
+  function sortProducts() {
+    const productList = document.getElementById('search-results');
+    const sortOption = document.getElementById('sortOptions').value;
+
+    fetch(`/product-sort?sort=${sortOption}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(res => res.json())
+      .then(data => {
+        productList.innerHTML = '';
+
+        data.payload.forEach(product => {
+          const productCard = document.createElement('div');
+          productCard.classList.add('col-lg-3', 'col-md-4', 'col-sm-6', 'g-4');
+          productCard.innerHTML = `
+            <div class="card mb-4 h-100">
+              <img src="/uploads/${product.image1}" class="card-img-top img-fluid" alt="Product Image" style="height: 200px; object-fit: cover;">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a href="/single-product/${product._id}" style="color: #dd1d1d; justify-content: center; font-weight: 700;">${product.name}</a>
+                </h5>
+                <h6 style="font-weight: 700;">Price: Rs. ${product.price}/-</h6>
+              </div>
+            </div>
+          `;
+          productList.appendChild(productCard);
+        });
+      })
+      .catch(error => console.error('Error:', error));
+  }
+</script>
+
+        
+
+
+        
+       
+        <script>
+        $(document).ready(function () {
+          let currentPage = 1;
+          const pageSize = 4; // Set your desired page size
+        
+          function fetchProducts(page) {
+            $.ajax({
+              method: 'post',
+              url: '/pagination',
+              data: {
+                page: page,
+                pageSize: pageSize
+              },
+              success: function (res) {
+          const productList = document.getElementById('search-results');
+
+          if (res && res.products.length > 0) {
+            let productHTML = '';
+
+            res.products.forEach((item) => {
+              // Create a product card similar to the homepage
+              productHTML += `
+                <div class="col-lg-3 col-md-4 col-sm-6 g-4 pl-4">
+                  <div class="card mb-4 h-100">
+                    <img src="/uploads/${item.image1}" class="card-img-top img-fluid" alt="Product Image" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                      <!-- Add other product details -->
+                      <h5 class="card-title">
+                        <a href="/single-product/${item._id}" style="color: #dd1d1d; justify-content: center; font-weight: 700;">${item.name}</a>
+                      </h5>
+                      <h6 style="font-weight: 700;"> Rs. ${item.price}/-</h6>
+                      <a href="/cart" class="btn btn-link" style="float:right;color:red">
+                        <i class="fa fa-cart-plus"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              `;
+            });
+
+            productList.innerHTML = productHTML;
+          }
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
+    }
+
+    fetchProducts(currentPage);
+
+          // Pagination button click event handlers
+          $('#prev-button').on('click', function () {
+            if (currentPage > 1) {
+              currentPage--;
+              fetchProducts(currentPage);
+            }
+          });
+        
+          $('#next-button').on('click', function () {
+            currentPage++;
+            fetchProducts(currentPage);
+        });
+        });
+        </script>
+        
+    <!-- Featured Section End -->
+
+    <!-- Banner Begin -->
+    <!-- <div class="banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="banner__pic">
+              <img src="img/banner/banner-1.jpg" alt="" />
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="banner__pic">
+              <img src="img/banner/banner-2.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- Banner End -->
+
+    <!-- Latest Product Section Begin -->
+    <!-- <section class="latest-product spad">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="latest-product__text">
+              <h4>Latest Products</h4>
+              <div class="latest-product__slider owl-carousel">
+                <div class="latest-prdouct__slider__item">
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-1.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6><spam class="text-danger">Crab</spam> <spam> </spam>Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-2.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-3.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                </div>
+                <div class="latest-prdouct__slider__item">
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-1.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-2.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-3.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="latest-product__text">
+              <h4>Top Rated Products</h4>
+              <div class="latest-product__slider owl-carousel">
+                <div class="latest-prdouct__slider__item">
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-1.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-2.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-3.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                </div>
+                <div class="latest-prdouct__slider__item">
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-1.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-2.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-3.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="latest-product__text">
+              <h4>Review Products</h4>
+              <div class="latest-product__slider owl-carousel">
+                <div class="latest-prdouct__slider__item">
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-1.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-2.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-3.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                </div>
+                <div class="latest-prdouct__slider__item">
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-1.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-2.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                  <a href="#" class="latest-product__item">
+                    <div class="latest-product__item__pic">
+                      <img src="img/latest-product/lp-3.jpg" alt="" />
+                    </div>
+                    <div class="latest-product__item__text">
+                      <h6>Crab Pool Security</h6>
+                      <span>$30.00</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <!-- Latest Product Section End -->
+
+    <!-- Blog Section Begin -->
+    <!-- <section class="from-blog spad">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-title from-blog__title">
+              <h2>From The Blog</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="blog__item">
+              <div class="blog__item__pic">
+                <img src="img/blog/blog-1.jpg" alt="" />
+              </div>
+              <div class="blog__item__text">
+                <ul>
+                  <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                  <li><i class="fa fa-comment-o"></i> 5</li>
+                </ul>
+                <h5><a href="#">Cooking tips make cooking simple</a></h5>
+                <p>
+                  Sed quia non numquam modi tempora indunt ut labore et dolore
+                  magnam aliquam quaerat
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="blog__item">
+              <div class="blog__item__pic">
+                <img src="img/blog/blog-2.jpg" alt="" />
+              </div>
+              <div class="blog__item__text">
+                <ul>
+                  <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                  <li><i class="fa fa-comment-o"></i> 5</li>
+                </ul>
+                <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
+                <p>
+                  Sed quia non numquam modi tempora indunt ut labore et dolore
+                  magnam aliquam quaerat
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="blog__item">
+              <div class="blog__item__pic">
+                <img src="img/blog/blog-3.jpg" alt="" />
+              </div>
+              <div class="blog__item__text">
+                <ul>
+                  <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                  <li><i class="fa fa-comment-o"></i> 5</li>
+                </ul>
+                <h5><a href="#">Visit the clean farm in the US</a></h5>
+                <p>
+                  Sed quia non numquam modi tempora indunt ut labore et dolore
+                  magnam aliquam quaerat
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <!-- Blog Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer spad">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="footer__about">
+              <div class="footer__about__logo">
+                <a href="./index.html"><img src="https://img.favpng.com/6/3/24/pizza-vs-burger-logo-brand-menu-restaurant-png-favpng-d6x5gZ1qH5Ki59ys2D3bw0U4K.jpg" style="background-color: black;padding-bottom: 10px;" height="70px" width="90px;    alt="">
+                </a>
+              </div>
+              <ul>
+                <li>Address: 60-49 Road 11378 New York</li>
+                <li>Phone: +65 11.188.888</li>
+                <li>Email: hello@colorlib.com</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+            <div class="footer__widget">
+              <h6>Useful Links</h6>
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">About Our Shop</a></li>
+                <li><a href="#">Secure Shopping</a></li>
+                <li><a href="#">Delivery infomation</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Our Sitemap</a></li>
+              </ul>
+              <ul>
+                <li><a href="#">Who We Are</a></li>
+                <li><a href="#">Our Services</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Innovation</a></li>
+                <li><a href="#">Testimonials</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12">
+            <div class="footer__widget">
+              <h6>Join Our Newsletter Now</h6>
+              <p>
+                Get E-mail updates about our latest shop and special offers.
+              </p>
+              <form action="#">
+                <input type="text" placeholder="Enter your mail" />
+                <button type="submit" class="btn-danger">Subscribe</button>
+              </form>
+              <div class="footer__widget__social">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-pinterest"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="footer__copyright">
+              <div class="footer__copyright__text">
+                <p>
+                  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                  Copyright &copy;
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  All rights reserved | This template is made with
+                  <i class="fa fa-heart" aria-hidden="true"></i> by
+                  <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+              </div>
+              <div class="footer__copyright__payment">
+                <img src="img/payment-item.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+   
+  </body>
+</html>

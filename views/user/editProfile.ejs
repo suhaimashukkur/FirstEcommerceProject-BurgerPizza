@@ -1,0 +1,236 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit profile</title>
+</head>
+<body>
+    <div class="container">
+        <form action="/update-profile/:id <%= user._id %>" method="post" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="fullname">Fullname</label>
+                <input type="text" id="fullname" name="name" required value="<%= user.name %>">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required value="<%= user.email %>">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="phone" id="phone" name="phone" required  value="<%= user.phone %>">
+            </div>
+            <div class="form-group">
+                <button type="submit">Update</button>
+            </div>
+
+        </form> 
+    </div>
+    <script>
+        function validateForm(){
+            const fullname = document.getElementById('fullname');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone')
+            const phoneNum = /^\d{10}$/;
+            if(!phone.matche(phoneNum)){
+                alert("pls enter the valid number");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        
+           
+        <title>Update Address</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
+    
+            .address-form {
+                background-color: #fff;
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 400px;
+                margin-top: 5px;
+                max-width: 50%;
+                box-sizing: border-box;
+                
+            }
+    
+            .address-form h3 {
+                text-align: center;
+                color: #333;
+            }
+    
+            .checkout__input {
+                margin-bottom: 5px;
+            }
+    
+            .checkout__input p {
+                margin: 0;
+                font-weight: bold;
+                color: #333;
+            }
+    
+            .checkout__input input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                height:30px
+            }
+    
+            button {
+            
+                color: #fff;
+                border: none;
+                padding: 15px;
+                border-radius: 4px;
+                cursor: pointer;
+                
+                font-size: 16px;
+                transition: background-color 0.3s;
+            
+            }
+    
+            button:hover {
+                background-color: #d32020;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <div class="address-form">
+            <form action="/update-profile/:id <%= user._id %>" method="post" onsubmit="return validateForm()">
+                <img src="https://img.favpng.com/6/3/24/pizza-vs-burger-logo-brand-menu-restaurant-png-favpng-d6x5gZ1qH5Ki59ys2D3bw0U4K.jpg" style="background-color: black;padding-bottom: 10px;" height="70px" width="90px;    alt="">
+        <br><br>
+                <h3><spam class="text-danger align-items-center"> Update </spam> Profile</h3>
+                <div class="checkout__input"><p><spam class="text-danger">Na</spam>me</p>
+                    <input type="text" id="name" name="name" value=" <%=user.name %> " onkeyup="validateName()" required>
+                <div id="name-error" class="error-message"></div>
+                </div>
+                <div class="checkout__input">
+                    <p><spam class="text-danger">Em</spam>ail</p>
+                    <input type="email" id="email" name="email" value = "<%= user.email %>" onkeyup="validateEmail()" required>
+                    <div id="email-error" class="error-message"></div>
+            
+                     </div>
+                <div class="checkout__input">
+                    <p><spam class="text-danger">Mob</spam>ile</p>
+                    <input type="phone" id="phone" name="phone" value = "<%= user.phone %>" onkeyup="validatePhone()"required>
+                    <div id="phone-error" class="error-message"></div>
+                    </div>
+                
+                <br>
+                <button class="btn btn-danger align-items-center " type="submit">Update
+
+                </button>
+            </form>
+        </div>
+        <script>
+            function validateForm(){
+                const fullname = document.getElementById('fullname');
+                const email = document.getElementById('email');
+                const phone = document.getElementById('phone')
+                const phoneNum = /^\d{10}$/;
+                if(!phone.matche(phoneNum)){
+                    alert("pls enter the valid number");
+                    return false;
+                }
+                return true;
+            }
+            
+            
+        </script>
+        <script>
+
+
+            var nameError = document.getElementById("name-error");
+  var emailError = document.getElementById("email-error");
+
+  var phoneError = document.getElementById("phone-error");
+
+  function validateName() {
+
+           
+var name = document.getElementById("name").value;
+
+if (name.length == 0) {
+nameError.innerHTML = "Name is required";
+return false;
+}
+
+if (!/^[a-zA-Z]+$/.test(name)) {
+    nameError.innerHTML = "Invalid characters in the name";
+    return false;
+}
+
+nameError.innerHTML = '<i  class="fa-solid fa-circle-check success-check"></i>';
+return true;
+}
+function validateEmail() {
+var email = document.getElementById("email").value;
+
+if (email.length === 0) {
+  emailError.innerHTML = "Email is required";
+  return false;
+}
+
+if (
+  !email.match(
+    /^(?:\+\d{1,3}\-)?[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+  )
+) {
+  emailError.innerHTML = "Email Invalid";
+  return false;
+}
+
+emailError.innerHTML = '<i  class="fa-solid fa-circle-check success-check"></i>';
+return true;
+}
+
+
+
+function validatePhone() {
+var phone = document.getElementById("phone").value;
+
+if (phone.length == 0) {
+  phoneError.innerHTML = "Phone no is required";
+  return false;
+}
+
+
+const phonePattern = /^\d{10}$/; // Assumes a 10-digit format
+        if (!phone.match(phonePattern)) {
+            phoneError.innerHTML   ="Please enter a valid 10-digit phone number.";
+            return false;
+        }
+
+phoneError.innerHTML = '<i  class="fa-solid fa-circle-check success-check"></i>';
+return true;
+}
+
+    </script>
+        
+    </body>
+</html>

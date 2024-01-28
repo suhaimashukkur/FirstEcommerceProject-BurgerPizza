@@ -1,0 +1,129 @@
+<%- include('../partials/user/userHeader.ejs') %>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Page</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #000; /* Set text color to black */
+            margin: 0;
+            padding: 0;
+            background-color: #fff; /* Set background color to white */
+        }
+
+        #wallet-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.1); /* Adjust border color */
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        #balance {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #transaction-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .transaction {
+        margin-bottom: 20px; /* Increased margin for better separation */
+        padding: 20px; /* Increased padding for better spacing */
+        border-radius: 8px;
+        font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .transaction:nth-child(even) {
+        background-color: rgba(255, 0, 0, 0.8); /* Red background for even rows */
+    }
+
+    .transaction:nth-child(odd) {
+        background-color: rgba(0, 0, 0, 0.8); /* White background for odd rows */
+    }
+
+    .credit {
+        color: #ffffff;
+    }
+
+    .debit {
+        color: #ffffff;
+    }
+
+    .transaction-time {
+        font-size: 14px;
+        color: #ffffff; /* Set date color to black */
+    }
+
+        #add-funds,
+        #withdraw-funds {
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #000; /* Set text color to black */
+            border: none;
+            cursor: pointer;
+            transition: filter 0.3s ease;
+        }
+
+        #add-funds:hover,
+        #withdraw-funds:hover {
+            filter: brightness(85%);
+        }
+
+        .transaction-time {
+            font-size: 14px;
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <section style="padding-top:70px"><br<br><br>
+        
+
+    <div id="wallet-container" class="container">
+        
+        <% if (balance) { %>
+        <h2 class="text-center mb-4"><spam class="text-danger">Your</spam> Wallet</h2>
+        <div id="balance" class="text-center mb-4">Balance:<spam class="text-danger"> ₹ <%= balance.walletBalance %>.00</spam></div>
+        <% } else { %>
+        <h2 class="text-center mb-4">Your Wallet is Empty</h2>
+        <% } %>
+
+        <h3 class="mb-3"><spam class="text-danger">Transaction</spam> History</h3>
+        <ul id="transaction-list">
+            <% if (transactions) { %>
+            <% transactions.transaction.forEach((trans)=> { %>
+            <li class="transaction <%= trans.mode === 'Credit' ? 'credit' : 'debit' %>">
+                <%= trans.mode %>&nbsp;
+                <%= trans.amount %>
+                <span class="transaction-time"> Date:  <%= trans.time.toLocaleDateString() %> <%= trans.time.toLocaleTimeString() %></span>
+            </li>
+            <% }); %>
+            <% }else{ %>
+            <h4>No transaction till now</h4>
+            <% } %>
+        </ul>
+    </div>
+</section>
+
+</body>
+
+</html>

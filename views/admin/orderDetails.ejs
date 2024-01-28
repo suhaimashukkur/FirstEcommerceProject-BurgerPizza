@@ -1,0 +1,224 @@
+ 
+
+<%- include('../partials/admin/adminHeader.ejs') %>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel - User Management</title>
+  <style>
+
+
+    h1{
+      text-align: center;
+      background-color: #ffffff;
+      color: #111010;
+      padding: 20px 0;
+      margin: 0;
+    }
+
+    h2{
+      text-align: center;
+      font-family:  sans-serif;
+      color: #000000;
+      font-size: 40px;
+      
+      margin: 0;
+    }
+
+
+    .container {
+      padding: 80px;
+    }
+
+    table {
+      width: 100%;
+      background-color: #fff;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #e6ebf0;
+      color: #b31a1a;
+    }
+
+    .actions {
+      text-align: center;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 6px 12px;
+      background-color: #fbfbfc;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .button.edit {
+      background-color: #0d0d0e;
+    }
+
+    .button.delete {
+      background-color: #d9534f;
+    }
+
+    .form {
+      width: 50%;
+      background-color: #fff;
+      padding: 20px;
+      margin: 20px auto;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form button {
+      background-color: #fafbfc;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    td.order-status {
+    min-width: 150px;
+  }
+  </style>
+</head>
+<body>
+
+
+
+<div class="container">
+  <h2><span class="text-danger">Order</span><span> Details</span></h2><br>
+
+  <table>
+    <tr>
+      <th>Order ID</th>
+      <th>User Name</th>
+      <th>Address</th>
+      <th>Order Items</th>
+      <th>Payment Method</th>
+      <th>Order Status</th>
+    </tr>
+    <% if (order) { %>
+      <tr>
+        <td><%= order._id %></td>
+        <td>
+          <% if (order && order.userId && order.userId.name) { %>
+            <%= order.userId.name %>
+          <% } else { %>
+            User Name Not Available
+          <% } %>
+        </td>
+        <td> <%= order.address .address %>, <%= order.address.streetAddress %>, <%= order.address.city %>, <%= order.address.postcode %>.</td>
+        <td>
+          <ul>
+            <% order.items.forEach(item => { %>
+              <li>
+                <% if (item.product && item.product.name) { %>
+                  <p>Product Name: <%= item.product.name %></p>
+                  <p>Quantity: <%= item.quantity %></p>
+                  <p>Price: <%= item.product.price %></p>
+                <% } else { %>
+                  <p>Product information not available</p>
+                <% } %>
+              </li>
+            <% }); %>
+          </ul>
+        </td>
+        <td><%= order.paymentMethod %></td>
+
+       <!-- ... Your existing HTML code ... -->
+
+<td class="order-status">
+  <div class="col-md-6">
+    <% if (order.canceled === true) { %>
+      <h6 class="canceled-status">Order Status:</h6>
+      <p class="canceled-status">Cancelled</p>
+    <% } else { %>
+      
+    <% } %>
+  </div>
+
+  <% if (!order.canceled) { %>
+    <div class="btn-container">
+      <% if (order.returned && order.returnApprovel === true ) { %>
+        <h3 style="color: red;">Order Returned</h3>
+      <% } else { %>
+        <form action="/admin/updateOrderStatus" method="post" id="update-status-form">
+          <div class="form-group">
+            <label for="orderStatus">Status:</label>
+            <select class="form-control" name="orderStatus" id="order-status-btn">
+              <option value="Order Placed">Order Placed</option>
+              <option value="Preparing">Packed</option>
+              <option value="Out for Delivery">Out for Delivery</option>
+              <option value="Delivered">Delivered</option>
+            </select>
+          </div>
+          <input type="hidden" name="orderId" value="<%= order._id %>">
+          <br>
+          <button type="submit" class="btn btn-danger ">Update Status</button>
+          
+        </form><br>
+        <h6> <%= order.status %></h6>
+        <div>
+          <% if (order.returnRequest === true) { %><br>
+            <% console.log('Return Request:', order.returnRequest); %>
+            <p style="color: red; font-size: 20px;"> User Requested for Return </p>
+            <a href="/admin/return-approvel/<%= order._id %>"><button class="btn btn-danger">Approve</button></a><br>
+            <a href="/admin/decline-return/<%= order._id %>"><button class="btn btn-danger">Decline</button></a>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+  <% } %>
+</td>
+
+
+
+      </tr>
+    <% } else { %>
+      <tr>
+        <td colspan="6">No order found</td>
+      </tr>
+    <% } %>
+
+
+    <% if (order.returned === true && order.returnApprovel === false) { %>
+      <h3 style="color: red;">User Requested for Returning the Order</h3>
+      <a href="/admin/approve-return/<%= order._id %>" style="color: green;"><button class="btn btn-danger action-button">Approve</button></a>
+    
+      <% }else if(order.returned === true && order.returnApprovel === true){ %>
+         <h3 style="color: green;">Order has sucessfully Returned</h3>
+         
+         <% } %>
+  </table>
+</div>
+
+
+
+</body></html>
+
+
+    
+    

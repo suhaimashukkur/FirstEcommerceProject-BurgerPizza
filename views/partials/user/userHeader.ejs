@@ -1,0 +1,182 @@
+
+
+
+
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    <style>
+        /* Your custom styles here */
+        body {
+            
+            overflow-x:hidden; /* Adjust according to your design */
+        }
+        .navbar {
+            background-color: #e74c3c; /* Your desired background color */
+            box-shadow: 0px 0px 10px rgba(249, 2, 2, 0.871);
+        }
+        .navbar-brand img {
+            height: 50px; 
+            /* Adjust according to your design */
+        }
+        .navbar-nav a {
+            color: #f90a0a
+            ; /* Your desired text color */
+        }
+        .navbar-toggler-icon {
+            color: #141313; /* Your desired color for the toggler icon */
+        }
+        .navbar-nav.ml-auto a {
+            margin-right: 15px; /* Adjust according to your design */
+        }
+        /* Add this style to your existing CSS */
+@media (max-width: 768px) {
+    .navbar-nav .dropdown-menu {
+        position: static;
+        float: none;
+        width: 20px;
+        max-height: 20px; /* Adjust the max-height according to your design */
+        overflow-y: auto;
+        
+    }
+
+    .navbar-nav .dropdown-item {
+        text-align: center;
+        background-color: #e74c3c;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Your navbar code here (modified for the new design) -->
+    <nav class="navbar navbar-expand-lg  navbar-light bg-dark" style="position: fixed; top: 0; width: 100%; z-index: 999; background-color: #e74c3c;" >
+        <a href="/"><img style="background-color: azure;border-radius: 10px;"  src="https://img.favpng.com/6/3/24/pizza-vs-burger-logo-brand-menu-restaurant-png-favpng-d6x5gZ1qH5Ki59ys2D3bw0U4K.jpg" style=" background-color: black;padding-bottom: 10px;" height="70px" width="90px;"     alt="">
+         </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>  
+     
+        </ul> 
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">t
+          <ul class="navbar-nav " style="background-color: azure;border-radius: 10px;">
+              <% category.forEach(cat => { %>
+                  <li class="nav-item">
+                      <a class="nav-link font-weight-bold text-danger" href="/category/<%= cat._id %>"><%= cat.categoryName %></a>
+                  </li>
+              <% }) %>
+          </ul>
+          </div>
+        <% if (user) { %>
+            <ul class="navbar-nav ml-auto" style="background-color: azure;width:30px;padding-right:200px;border-radius: 10px;">
+            
+             <div class="dropdown">
+                    <a class="btn dropdown-toggle"  style="padding-left:50px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-user text-danger"></i> <spam class="text-danger"></a>
+                
+                
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+                      <li><a class="dropdown-item" style="color: #141313;"  href="/profile">Profile</a></li>
+                      <li><a class="dropdown-item" style="color: #141313" href="/home">Home</a></li>
+                
+                    <li><a  id="logoutLink" class="dropdown-item" style="color: #141313"  href="/logout">Logout</a></li>
+                  </ul>
+                  </div>
+                  
+                <li class="nav-item" >
+                    <a class="nav-link text-danger" href="/cart">
+                        <i class="fa fa-shopping-cart text-danger" ></i>
+                    </a>
+                </li>
+    
+    
+    
+                
+               
+            </ul>
+        <% }else{ %>
+            <ul class="navbar-nav ml-auto">
+                
+                &nbsp;&nbsp;&nbsp;
+                <li class="nav-item">
+                    <a class="text-danger" href="/login"><i class="fa fa-user text-danger"></i> <spam class="text-danger">Login</spam></a>
+                </li>
+                
+            </ul>
+            <% } %>
+          
+        </div>
+      </nav>
+
+    <!-- Bootstrap JS and your scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Your scripts here
+        
+    // Function to show SweetAlert on logout
+     function confirmLogout(event) {
+        // Prevent the default behavior of the anchor element
+        event.preventDefault();
+  
+        Swal.fire({
+            title: 'Logout',
+            text: 'Are you sure you want to logout?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) { 
+                // If the user clicks "Yes, logout," redirect to the logout URL
+                 window.location.href = '/logout';
+            }
+        });
+    }
+  
+    // Attach the function to the logout link
+    document.querySelector('#logoutLink').addEventListener('click', confirmLogout);
+  </script>
+  <script> 
+    // Function to show SweetAlert on logout
+     function confirmLogout(event) {
+        // Prevent the default behavior of the anchor element
+        event.preventDefault();
+  
+        Swal.fire({
+            title: 'Logout',
+            text: 'Are you sure you want to logout?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If the user clicks "Yes, logout," redirect to the logout URL
+                window.location.href = '/logout';
+            }
+        });
+    }
+  
+    // Attach the function to the logout link
+    document.querySelector('#logoutLink').addEventListener('click', confirmLogout);
+  </script> 
+
+    
+</body>
+</html>

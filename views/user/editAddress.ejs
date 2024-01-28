@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        
+           
+        <title>Update Address</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
+    
+            .address-form {
+                background-color: #fff;
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 400px;
+                margin-top: 5px;
+                max-width: 50%;
+                box-sizing: border-box;
+                
+            }
+    
+            .address-form h3 {
+                text-align: center;
+                color: #333;
+            }
+    
+            .checkout__input {
+                margin-bottom: 5px;
+            }
+    
+            .checkout__input p {
+                margin: 0;
+                font-weight: bold;
+                color: #333;
+            }
+    
+            .checkout__input input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                height:30px
+            }
+    
+            button {
+            
+                color: #fff;
+                border: none;
+                padding: 15px;
+                border-radius: 4px;
+                cursor: pointer;
+                
+                font-size: 16px;
+                transition: background-color 0.3s;
+            
+            }
+    
+            button:hover {
+                background-color: #d32020;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <div class="address-form">
+            <form action="/update-address/<%= address._id %>" method="post">
+                <img src="https://img.favpng.com/6/3/24/pizza-vs-burger-logo-brand-menu-restaurant-png-favpng-d6x5gZ1qH5Ki59ys2D3bw0U4K.jpg" style="background-color: black;padding-bottom: 10px;" height="70px" width="90px;    alt="">
+        <br><br>
+                <h3><spam class="text-danger align-items-center"> Update </spam> Address</h3>
+                <div class="checkout__input"><p><spam class="text-danger">Add</spam>ress</p>
+                    <input type="text" name="address" value="<%= address.address %>" class="form-control">
+                </div>
+                <div class="checkout__input">
+                    <p><spam class="text-danger">Street</spam>Address</p>
+                    <input type="text" name="streetAddress" value="<%= address.streetAddress %>" class="form-control">
+                </div>
+                <div class="checkout__input">
+                    <p><spam class="text-danger">Apart</spam>ment</p>
+                    <input type="text" name="apartment" value="<%= address.apartment %>" class="form-control">
+                </div>
+                <div class="checkout__input">
+                    <p><spam class="text-danger">Ci</spam>ty</p>
+                    <input type="text" name="city" value="<%= address.city %>" class="form-control">
+
+                </div>
+                <div class="checkout__input">
+                    <p><spam class="text-danger">Post</spam>Code</p>
+                    <input type="text" name="postcode" value="<%= address.postcode %>" class="form-control">
+
+                </div>
+                
+                <div class="checkout__input">
+                    <p><spam class="text-danger">Em</spam>ail</p>
+                    <input type="text" name="email" value="<%= address.email %>" class="form-control">
+
+                </div><br>
+                <button class="btn btn-danger align-items-center " type="submit">Update
+
+                </button>
+            </form>
+        </div>
+    </body>
+</html>

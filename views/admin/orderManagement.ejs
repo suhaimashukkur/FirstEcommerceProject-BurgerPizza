@@ -1,0 +1,61 @@
+
+
+
+<%- include('../partials/admin/adminHeader.ejs') %>
+<!-- vieworderdetails.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Your existing head content -->
+</head>
+<body>
+    
+    <div class="container">
+        <h2 style="padding-top: 30px; align-items: center; text-align: center;"><span class="text-danger">Order</span> Management</h2>
+<br>
+<% if (order) { %>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th style="color: brown;background-color:antiquewhite;">User Name</th>
+                <th style="color: brown;background-color:antiquewhite;">Order ID</th>
+                <th style="color: brown;background-color:antiquewhite;">Purchase Date</th>
+                <th style="color: brown;background-color:antiquewhite;">Total Amount</th>
+                <th style="color: brown;background-color:antiquewhite;">Coupon Code</th>
+                <th style="color: brown;background-color:antiquewhite;">Coupon Discount(%)</th>
+
+                <th style="color: brown;background-color:antiquewhite;">Status</th>
+
+                <th style="color: brown;background-color:antiquewhite;">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% order.forEach(order => { %>
+                <tr>
+                    <td> <% if (order && order.userId && order.userId.name) { %>
+                        <%= order.userId.name %>
+                      <% } else { %>
+                        User Name Not Available
+                      <% } %></td>
+                    <td><%= order._id %></td>
+                    <td><%= order.formattedDateOrdered %></td>
+                    <td>Rs: <%= order.totalAmount %></td>
+                    <td><%= order.coupon ? order.coupon.couponCode : 'N/A' %></td>
+                    <td><%= order.coupon ? order.coupon.discountPercentage : 'N/A' %></td>
+                   
+                    <td> <%= order.status %></td>
+                    <td><a href="/admin/view-order-details-admin/<%= order._id %>" class="btn btn-danger">View Details</a></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+<% } else { %>
+    <p class="alert alert-danger">No orders found</p>
+<% } %>
+</div>
+
+
+    <!-- Include Bootstrap JS and dependencies (optional) -->
+</body>
+</html>

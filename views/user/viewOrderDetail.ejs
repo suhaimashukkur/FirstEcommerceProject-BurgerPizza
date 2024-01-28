@@ -1,0 +1,359 @@
+<%- include('../partials/user/userHeader.ejs') %>
+<!DOCTYPE html>
+<html lang="zxx">
+
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <head>
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+
+
+
+    
+    <style>
+          .checkout__form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 1000px;
+            max-width: 100%;
+        }
+
+        .checkout__form h4 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .col-lg-8 {
+            margin-bottom: 20px;
+        }
+
+        .checkout__form label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .checkout__form input[type="checkbox"] {
+            margin-bottom: 10px;
+        }
+
+        .checkout__form button {
+            background-color: #c70f18;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 30%;
+            font-size: 16px;
+            margin-bottom: 20px;
+            float:right
+        }
+
+        .addresslist {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .addresslist p {
+            margin: 0;
+            color: #333;
+        }
+
+        .checkout__order {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkout__order h4 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .checkout__order ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .checkout__order li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .checkout__order__subtotal,
+        .checkout__order__total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .checkout__input__checkbox {
+            margin-top: 20px;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Page Preloder -->
+
+    
+    <!-- Breadcrumb Section Begin -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+           
+											
+        </div>
+       
+    <!-- Hero Section End -->
+
+    
+ <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text text-black">
+                        <h2 >Checkout</h2>
+                        <div class="breadcrumb__option">
+                            <a class="text-black" href="/home">Home</a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </section> 
+ 
+
+    <!-- Shoping Cart Section Begin -->
+    
+   
+<body>
+    <div>
+        <!-- Your header content -->
+        <!-- ... -->
+    </div>
+
+    <br><br>
+
+    <div class="container">
+        <div class="ordered-items">
+            <h3><span class="text-danger">User Order Detail</span></h3>
+           
+            <!-- Loop through each order -->
+            <% order.items.forEach(item => { %>
+                <div class="card" style="margin-bottom: 20px;">
+                   
+                    <div class="card-body">
+                        <button id="invoice-button" class="btn" style="box-shadow: 1px 1px 1px 4px rgba(244, 3, 3, 0.866);float: right;">Download Invoice</button>
+                        <input type="hidden" value="<%= order._id %>"  id="hidden">
+              
+                        <% if (item.product) { %>
+                            <img src="/uploads/<%= item.product.image1 %>" alt="<%= item.product.name %>" width="100">
+                            <p><span class="text-danger">Product:</span> <%= item.product.name %></p>
+                            <p><span class="text-danger">Quantity:</span> <%= item.quantity %></p>
+                        <% } else { %>
+                            <p>Product information not available</p>
+                        <% } %>
+                    </div>
+                </div>
+            <% }) %>
+            
+
+            <!-- Display order information outside the card loop -->
+           <!-- Display order information outside the card loop -->
+<div class="card" style="margin-bottom: 20px;">
+    <div class="card-body">
+        <p><span class="text-danger">Order ID:</span> <%= order._id %></p>
+        <p><span class="text-danger">User ID:</span> <%= order.userId %></p>
+        <p><span class="text-danger">Total Amount:</span> <%= order.totalAmount %></p>
+        <p><span class="text-danger">Payment Method:</span> <%= order.paymentMethod %></p>
+       
+
+        <!-- <p><span class="text-danger">Status:</span>  -->
+           
+                
+                            <div class="col-md-6">
+                                <% if (order.canceled === true) { %>
+                                    <h6 class="canceled-status">Order Status:</h6>
+                                    <p class="canceled-status">Cancelled</p>
+                                <% } else { %>
+                                    <h6>Order Status:   <%= order.status %></h6>
+                                  
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+
+
+
+
+                <div class="btn-container">
+                 <% if (order.returned  && order.returnApprovel) { %>
+                  <h3 style="color: green;">Order successfully Returned</h3>
+                 <% }else{ %>
+                    <% if (order.returned === true  && order.returnApprovel === false) { %>
+                        <p style="color: red;">Requested for Return and waiting for approval</p>
+                    <% } else if (order.status === "Delivered" && !order.canceled) { %>
+                        <a href="/return-order/<%= order._id %>"><button class="btn btn-danger">Return Order</button></a>
+                    <% } else if (!order.canceled) { %>
+                        <a href="/cancel-order/<%= order._id %>"><button class="btn btn-danger">Cancel Order</button></a>
+                    <% } %>
+                    <% } %>
+                </div>
+                
+                
+                
+            </div>
+        
+        
+    
+    <!-- End of Product Information -->
+
+    
+    
+</div>
+
+    
+
+    
+     <!-- Js Plugins -->
+     <script src="js/jquery-3.3.1.min.js"></script>
+     <script src="js/bootstrap.min.js"></script>
+     <script src="js/jquery.nice-select.min.js"></script>
+     <script src="js/jquery-ui.min.js"></script>
+     <script src="js/jquery.slicknav.js"></script>
+     <script src="js/mixitup.min.js"></script>
+     <script src="js/owl.carousel.min.js"></script>
+     <script src="js/main.js"></script>
+     
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/easyinvoice/dist/easyinvoice.min.js"></script>
+
+<script src="https://unpkg.com/easyinvoice/dist/easyinvoice.min.js"></script>
+    
+
+
+<script>
+    
+
+   
+    $(document).ready(function () {
+      var orderId = document.getElementById('hidden').value;
+      $('#invoice-button').on('click', function (e) {
+        e.preventDefault();
+    
+        console.log(orderId);
+    
+        $.ajax({
+          type: 'POST',
+          url: '/order-invoice',
+          data: {
+            orderId: orderId
+          },
+          success: function (response) {
+    let order = response;
+    console.log(order);
+    console.log(order.items);
+    let item = []
+
+    const products = order.items.map(item => {
+        console.log(item);  // Add this line to check the content of each item
+        return {
+            
+            "quantity": parseInt(item.quantity),
+            "description": item.product.name ,
+            "tax-rate": 0, // You may need to fetch tax rate from somewhere
+            "price": parseInt(item.product.price)
+            
+        };
+        console.log(item.product)
+        item.push(products)
+    });
+            
+            
+
+           
+            
+    var data = {
+  "images": {
+    "logo": "https://public.budgetinvoice.com/img/logo_en_original.png",
+  },
+  "sender": {
+    "company": "Sample Corp",
+    // ... other sender details
+  },
+  "client": {
+    "company": order.address.address,
+    "address": order.address.streetAddress,
+    "zip": order.address.postcode,
+    "city": order.address.city,
+    "country": "Kerala"
+  },
+  "information": {
+    "ID": order._id.toString().substring(0, 10),
+    "date": new Date(order.createdAt).toLocaleDateString('en-US')
+  },
+  "product": item, // Make sure this array is correctly populated with item details
+  "bottom-notice": "Kindly pay your invoice within 15 days.",
+  "settings": {
+    "currency": "USD",
+  },
+};
+
+// Debugging: Log the contents of the data object
+console.log("Data object before generating invoice:", data);
+
+// Generate invoice
+easyinvoice.createInvoice(data, function (result) {
+  easyinvoice.download('myInvoice.pdf', result.pdf);
+});
+          },
+          error: function (error) {
+            console.log(error);
+          },
+        });
+      });
+    
+    });
+    
+   </script>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<%- include('../partials/user/userHeader.ejs') %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <section style="background-image: -webkit-gradient(); padding-top: 70px;">
+
+        <section>
+            <div class="container">
+                <br><br>
+
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+
+                        <div class="breadcrumb__text text-black">
+                            <h2 class="text-danger">Profile</h2>
+                            <div class="breadcrumb__option">
+                                
+                                <a class="text-black" href="/checkout">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="row pt-5">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                            alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3"><%= user.name %></h5>
+
+                        <!-- Dropdown Button -->
+                        <div class="dropdown">
+                          <a class="btn dropdown-toggle"  style="padding-left:50px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              <button class="btn btn-danger">View Details</button> </a>
+                      
+                      
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+                            <li><a class="dropdown-item" style="color: #141313;"  href="/vieworderdetails">View Order</a></li>
+                            <li><a class="dropdown-item" style="color: #141313" href="/user/edit-profile/<%= user._id %>">Edit Profile</a></li>
+                            <li><a class="dropdown-item" style="color: #141313" href="/wallet">Wallet</a></li>
+                      
+                          <li><a  id="logoutLink" class="dropdown-item" style="color: #141313"  href="/logout">Logout</a></li>
+                        </ul>
+                        
+                        </div>
+                        <!-- End Dropdown Button -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <!-- Profile Details Content -->
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0"><%= user.name %></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0"><%= user.email %></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0"><%= user.phone %></p>
+                            </div>
+                        </div>
+                       
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Address</p>
+                            </div>
+                            <div class="col-sm-12">
+                                <!-- Addresses -->
+                                <% if(addresses?.addresses) { %>
+                                    <% addresses.addresses.forEach((address,index) => { %>
+                                        <div class="addresslist mb-3">
+                                            <p><span class="text-danger">Address: </span>: <%= address.address %></p>
+                                            <p><span class="text-danger">Street Address: </span> <%= address.streetAddress %> </p>
+                                            <p><span class="text-danger">Pincode: </span> <%= address.postcode %></p>
+                                            <p><span class="text-danger">City: </span> <%= address.city %></p>
+                                            <div class="d-flex justify-content-end">
+                                                <div>
+                                                    <a href="/user/edit-address/<%= address._id %>">
+                                                        <button class="btn btn-success mr-2">Edit Address</button>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <a href="/user/delete-address/<%= address._id %>" onclick="return alert('Are You Delete This Address?')">
+                                                        <button class="btn btn-danger">Delete Address</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% }) %>
+                                <% } else  { %>
+                                    <p>No address found</p>
+                                <% } %>
+                                <!-- End Addresses -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Add Bootstrap JavaScript, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

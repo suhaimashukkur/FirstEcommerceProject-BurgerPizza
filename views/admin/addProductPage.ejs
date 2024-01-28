@@ -1,0 +1,219 @@
+<%- include('../partials/admin/adminHeader.ejs') %>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    
+    margin: 0;
+    padding : 0;
+    
+  }
+
+  .container {
+    max-width: 400px;
+    
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-addProduct {
+    text-align: center;
+  }
+
+  .form-addProduct h3 {
+    margin-bottom: 20px;
+    padding-top: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    height:30px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .error {
+    color: red;
+  }
+
+  .success {
+    color: green;
+  }
+
+  .btn-primary {
+    background-color: #151618;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: #0e0e0f;
+  }
+</style>
+<section padding-top="20px">
+
+<div class="container ">
+  <form class="form-addProduct" action="/admin/add-product" enctype="multipart/form-data" method="post" id="productForm">
+    <h3 ><spam class="text-danger">Add</spam><spam>  </spam>Products</h3>
+
+    <div class="form-group">
+      
+      <input type="text" name="name" required id="nameField" placeholder="Name">
+      <label  for="name"><spam class="text-danger">Na</spam><spam>me</spam></label>
+      <span class="name error"></span>
+    </div>
+
+    <div class="form-group">
+      <label  for="category"><spam class="text-danger">Choose</spam><spam> </spam>Category</label>
+      <select class="form-control"  name="category"  required id="categoryField">
+        <option   value="">Choose the category</option>
+        <% category.forEach((cat, index) => { %>
+        <option value="<%= cat._id %>"><%= cat.categoryName %></option>
+        <% }) %>
+      </select>
+      <span class="category error"></span>
+    </div>
+
+    <div class="form-group">
+      <label  for="price"><spam class="text-danger">Pr</spam><spam>ice</spam></label>
+      <input type="number" name="price" required id="priceField" placeholder="Price">
+      <span class="price error"></span>
+    </div>
+
+    <div class="form-group">
+      <label  for="description"><spam class="text-danger">Descri</spam><spam>ption</spam></label>
+      <input type="text" name="description" required id="descriptionField" placeholder="Description">
+      <span class="description error"></span>
+    </div>
+    
+
+    <div class="form-group">
+      <label  for="image1"><spam class="text-danger">Image</spam><spam> </spam>1</label>
+      <input type="file" name="image1" required id="file1">
+      <span class="file1 error"></span>
+    </div>
+
+    <div class="form-group">
+      <label  for="image2"><spam class="text-danger">Image</spam><spam> </spam>2</label>
+      <input type="file" name="image2" required id="file2">
+      <span class="file2 error"></span>
+    </div>
+
+   
+    <div id="liveAlertPlaceholder" style="width: 100%;"></div>
+    <button type="submit" class="btn btn-danger" id="liveAlertBtn">Submit</button>
+  </form>
+</div>
+</section>
+
+<script>
+const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+
+const appendAlert = (message, type) => {
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>'
+  ].join('');
+
+  alertPlaceholder.innerHTML = ''; 
+  alertPlaceholder.append(wrapper);
+};
+
+const form = document.getElementById('productForm');
+
+form.addEventListener('change', function (event) {
+  let valid = true;
+
+  // Validation for the name field
+  const nameField = document.getElementById('nameField');
+  const nameError = document.querySelector('.name');
+  if (nameField.value.trim() === '') {
+    nameError.textContent = 'Name is required';
+    valid = false;
+  } else {
+    nameError.innerHTML = '<i  style="color: green;" class="fa-solid fa-circle-check"></i>';
+  }
+
+  const categoryField = document.getElementById('categoryField');
+  const categoryError = document.querySelector('.category');
+  if (categoryField.value === '') {
+    categoryError.textContent = 'Category is required';
+    valid = false;
+  } else {
+    categoryError.innerHTML = '<i  style="color: green;" class="fa-solid fa-circle-check"></i>';
+  }
+
+  const priceField = document.getElementById('priceField');
+  const priceError = document.querySelector('.price');
+  if (isNaN(priceField.value) || priceField.value <= 0) {
+    priceError.textContent = 'Price must be a positive number';
+    valid = false;
+  } else {
+    priceError.innerHTML = '<i  style="color: green;" class="fa-solid fa-circle-check"></i>';
+  }
+
+  const descriptionField = document.getElementById('descriptionField');
+  const descriptionError = document.querySelector('.description');
+  if (descriptionField.value.trim() === '') {
+    descriptionError.textContent = 'Description is required';
+    valid = false;
+  } else {
+    descriptionError.innerHTML = '<i  style="color: green;" class="fa-solid fa-circle-check"></i>';
+  }
+
+  const file1 = document.getElementById('file1');
+  const file1Error = document.querySelector('.file1');
+  if (file1.files.length === 0) {
+    file1Error.textContent = 'Image1 is required';
+    valid = false;
+  } else {
+    file1Error.innerHTML = '<i  style="color: green;" class="fa-solid fa-circle-check"></i>';
+  }
+
+  const file2 = document.getElementById('file2');
+  const file2Error = document.querySelector('.file2');
+  if (file2.files.length === 0) {
+    file2Error.textContent = 'Image2 is required';
+    valid = false;
+  } else {
+    file2Error.innerHTML = '<i  style="color: green;" class="fa-solid fa-circle-check"></i>';
+  }
+
+  
+
+  if (!valid) {
+    event.preventDefault(); 
+    appendAlert('Please fill in all required fields correctly.', 'danger');
+  }
+});
+
+
+form.addEventListener('submit', function () {
+
+  isFormSubmitted = true;
+  
+  appendAlert('A new product has been added to the Product list.', 'success');
+});
+</script>

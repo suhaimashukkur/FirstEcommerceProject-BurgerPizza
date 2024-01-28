@@ -1,0 +1,119 @@
+<%- include('../partials/admin/adminHeader.ejs') %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Add your head section content here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 500px; /* Adjust the maximum width as needed */
+            margin: 0 auto; /* Center the container */
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container" style="padding-top:140px">
+            <h3 ><spam class="text-danger">Category</spam>  <spam> </spam>Offer</h3>
+
+            <form id="categoryOfferForm">
+                <div class="form-group">
+                    
+                        <!-- Options for categories -->
+                        <label for="category"><span class="text-danger">Choose</span> Category</label>
+                    <select class="form-control" name="category" required id="categoryField">
+                        
+                        <% category.forEach((cat, index) => { %>
+                            <option value="<%= cat._id %>"><%= cat.categoryName %></option>
+                        <% }) %>
+                    </select>
+                   
+                    <span class="category error"></span>
+                </div>
+                <label for="offerPercentage">Discount Percentage:</label><br>
+                <select name="offerPercentage" id="offerPercentage" required>
+                    <option value="">Select Discount</option>
+                    <option value="10">0%</option>
+                    <option value="10">10%</option>
+                    <option value="20">20%</option>
+                    <!-- Add other percentage options -->
+                </select>
+                <button type="button" onclick="submitForm()" class="btn btn-danger">Create Offer</button>
+            </form>
+            
+            <!-- <form id="categoryOfferForm">
+                <div class="form-group">
+                    <label for="category"><span class="text-danger">Choose</span> Category</label>
+                    <select class="form-control" name="category" required id="categoryField">
+                        <option value="">Choose the category</option>
+                        <% category.forEach((cat, index) => { %>
+                            <option value="<%= cat._id %>"><%= cat.categoryName %></option>
+                        <% }) %>
+                    </select>
+                    <span class="category error"></span>
+                </div>
+                <label for="discountPercentage" class="text-danger">Discount Percentage:</label><br>
+                <select name="discountPercentage" id="discountPercentage" required>
+                    <option value="">Select Discount</option>
+                    <option value="10">10%</option>
+                    <option value="20">20%</option>
+                    <option value="30">30%</option>
+                    <option value="40">40%</option>
+                    <option value="50">50%</option>
+                    <option value="60">60%</option>
+                </select>
+            
+                <form id="categoryOfferForm">
+                
+                    <button type="button" onclick="submitForm()" class="btn btn-danger">Create Offer</button>
+                
+            </form> -->
+        </div>
+    </section>
+
+    <!-- Bootstrap JS and Popper.js (optional) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+       async function submitForm() {
+    try {
+        const form = document.getElementById('categoryOfferForm');
+        const formData = new FormData(form);
+
+        const response = await fetch('/admin/create-category-offer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded', // Set the content type
+            },
+            body: new URLSearchParams(formData), // Convert formData to URLSearchParams
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Redirect or handle the response as needed
+         window.location.href = '/admin/offers';
+
+    } catch (error) {
+        console.error('Error submitting form:', error.message);
+    }
+}
+</script
+</body>
+</html>

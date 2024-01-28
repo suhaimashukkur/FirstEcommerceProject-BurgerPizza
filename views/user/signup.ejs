@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+        <!-- ... other head elements ... -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <!-- ... your existing head content ... -->
+    
+    
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .error-message {
+            color: red;
+        }
+        .message-box {
+  position: fixed;
+  top: 18%;
+  left: 36%;
+  width: 30%;
+  background-color: rgba(239, 19, 19, 0.753);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  z-index: 9999; /* Set z-index to position the message box above other elements */
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  border: 0.5px solid rgba(92, 92, 92, 0.74);
+}
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            width: 400px;
+        }
+        .container h2 {
+            text-align: center;
+            color: #272323;
+        }
+        .form-group {
+            margin: 2px 0;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 3px;
+            color: #131111;
+        }
+        .form-group input {
+            width: 95%;
+            padding: 3px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 3px;
+        }
+        .form-group button {
+            background-color: #c51b1b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            align-content: center;
+        justify-content:center;
+            
+
+        }
+    </style>
+</head>
+<body>
+   
+
+
+
+    <% if (typeof userAlertmsg !== 'undefined') { %>
+        <div class="message-box" id="alertmsgID"><%= userAlertmsg %></div>
+    <% } %>
+
+    
+    
+    <% if (typeof errorMessages !== 'undefined' && errorMessages.length > 0) { %>
+        <div class="error-messages">
+            <%= errorMessages.join('<br>') %>
+        </div>
+    <% } %>
+
+
+    
+   
+    
+
+
+
+    <div class="container">
+        <img src="https://img.favpng.com/6/3/24/pizza-vs-burger-logo-brand-menu-restaurant-png-favpng-d6x5gZ1qH5Ki59ys2D3bw0U4K.jpg" style="background-color: black;padding-bottom: 10px;" height="70px" width="90px;    alt="">
+        
+        <h2><spam class="text-danger">Sign</spam><spam>  </spam>Up</h2>
+        <form action="/signup" method="post" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label  for="fullname"><spam class="text-danger">Full</spam><spam>  </spam>Name</label>
+                <input type="text" id="name" name="name" onkeyup="validateName()" required>
+            <div id="name-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label  for="email"><spam class="text-danger">Ema</spam><spam>il</spam></label>
+                <input type="email" id="email" name="email" onkeyup="validateEmail()" required>
+            <div id="email-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label  for="phone"><spam class="text-danger">Pho</spam><spam>ne</spam></label>
+                <input type="Number" id="phone" name="phone" onkeyup="validatePhone()" required>
+                <div id="phone-error" class="error-message"></div>
+                
+            </div>
+
+            <div class="form-group">
+                <label  for="password"><spam class="text-danger">Pass</spam><spam>word</spam></label>
+                <input type="password" id="password" name="password"  required>
+                <div id="password-error" class="error-message" ></div>
+                
+            </div>
+            <div class="form-group">
+                <label  for="confirm_password"><spam class="text-danger">Confirm</spam><pam>  </pam>Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" onkeyup="validatePassword()" required>
+                <div id="password-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <button   type="submit">Sign Up</button>
+                
+            </div>
+            <div id="errorMessages" style="color: red;"></div>
+        </form><br>
+        <h6 style=" color: #888" >Already Have Acoount?
+        <a class="text-black text-align-center" style="font-weight: bolder;"    href="/login">login</a></h6>
+    </div>
+    <div id="errorMessages" style="color: red;"></div>
+   
+    <!-- ... your HTML code ... -->
+
+    <script>
+        function validateForm() {
+            var isPasswordValid = validatePassword();
+    
+            if (isPasswordValid) {
+                // Success: Show SweetAlert success message
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sign Up Successful',
+                    text: 'You have successfully signed up!',
+                });
+                return true; // Allow the form submission
+            } else {
+                // Error: Show SweetAlert error message
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Sign Up Failed',
+                    text: 'Error in sign-up. Please check the form fields.',
+                });
+                return false; // Prevent the form submission
+            }
+        }
+    
+       
+    
+    
+    document.querySelectorAll('.toggle-password').forEach(function (eye) {
+        eye.addEventListener('click', function () {
+            const passwordInput = document.querySelector(this.getAttribute('toggle'));
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('active');
+        });
+    });
+    
+    var nameError = document.getElementById("name-error");
+    var emailError = document.getElementById("email-error");
+    var passwordError = document.getElementById("password-error");
+    var phoneError = document.getElementById("phone-error");
+    
+    function validateName() {
+        var name = document.getElementById("name").value;
+    
+        if (name.length == 0) {
+            nameError.innerHTML = "Name is required";
+            return false;
+        }
+    
+        if (!/^[a-zA-Z]+$/.test(name)) {
+            nameError.innerHTML = "Invalid characters in the name";
+            return false;
+        }
+    
+        nameError.innerHTML = '<i class="fa-solid fa-circle-check success-check"></i>';
+        return true;
+    }
+    
+    function validateEmail() {
+        var email = document.getElementById("email").value;
+    
+        if (email.length === 0) {
+            emailError.innerHTML = "Email is required";
+            return false;
+        }
+    
+        if (
+            !email.match(
+                /^(?:\+\d{1,3}\-)?[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+            )
+        ) {
+            emailError.innerHTML = "Email Invalid";
+            return false;
+        }
+    
+        emailError.innerHTML = '<i class="fa-solid fa-circle-check success-check"></i>';
+        return true;
+    }
+    
+    
+function validatePassword() {
+    var password = document.getElementById("password").value;
+    var password1 = document.getElementById("confirm_password").value;
+
+    if (password !== password1) {
+        passwordError.innerHTML = "Passwords and confirm password must match!!";
+        return false;
+    }
+
+    // Check if the password meets the strong password criteria
+    var strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/;
+
+    if (!strongPasswordRegex.test(password)) {
+        passwordError.innerHTML = "Password must contain at least 8 characters, including uppercase, lowercase, a number, and a special character.";
+        return false;
+    }
+
+    passwordError.innerHTML = '<i class="fa-solid fa-circle-check success-check"></i>';
+    return true;
+}
+
+
+    
+    function validatePhone() {
+        var phone = document.getElementById("phone").value;
+    
+        if (phone.length == 0) {
+            phoneError.innerHTML = "Phone no is required";
+            return false;
+        }}
+        document.addEventListener('DOMContentLoaded', function () {
+    const alertMsgBox = document.getElementById('alertmsgID');
+
+    // Check if the alert message box exists
+    if (alertMsgBox) {
+        // Set a timeout to hide the message box after 5 seconds (5000 milliseconds)
+        setTimeout(function () {
+            alertMsgBox.style.display = 'none'; // or alertMsgBox.remove(); to completely remove the element
+        }, 1000); // 5000 milliseconds = 5 seconds
+    }
+  });
+            </script>
+        
+    
+</body>
+</html>

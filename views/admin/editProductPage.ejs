@@ -1,0 +1,271 @@
+<%- include('../partials/admin/adminHeader.ejs') %>
+
+
+
+
+
+
+<style>
+  
+  body {
+    font-family: Arial, sans-serif;
+    
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    max-width: 1000px;
+    width: 30%;
+  }
+
+  .form-updateProduct {
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .form-updateProduct h3 {
+    
+
+    margin-bottom: 10px;
+  }
+
+
+  .form-group {
+    padding-top: 20px;
+    
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .error {
+    color: #dc3545;
+  }
+
+  .success {
+    color: #28a745;
+  }
+
+  .btn-primary {
+    background-color: #b61d2a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .btn-primary:hover {
+    background-color: #121213;
+  }
+
+</style>
+<section style="padding-top:40px">
+  <div class="container padding-top:10px">
+
+  <form class="form-updateProduct" action="/admin/update-product/<%= product._id %>"  onsubmit="editProduct(this)" method="post" enctype="multipart/form-data" id="productForm">
+    <h3><spam class="text-danger">Edit</spam><spam> </spam>Product</h3>
+
+    <div class="form-group">
+      <input type="text" name="name" required id="name" placeholder="Name" value="<%= product.name %>">
+      <label for="name"><spam class="text-danger">Na</spam>me</label>
+      <span class="name error"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="category"><span class="text-danger">Choose</span><span> </span>Category  </label>
+      <select class="form-control" name="category" id="category" required>
+        <% category.forEach((cat, index) => { %>
+        <option value="<%= cat._id %>"><%= cat.categoryName %></option>
+        <% }) %>
+      </select>
+      <span class="category error"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="price"><spam class="text-danger">Pr</spam>ice</label>
+      <input type="number" name="price" required id="price" placeholder="Price" value="<%= product.price %>">
+      <span class="price error"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="description"><spam class="text-danger">Des</spam>cription</label>
+      <input type="text" name="description" required id="description" placeholder="Description" value="<%= product.description %>">
+      <span class="description error"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="image1"><spam class="text-danger">Image</spam><spam> </spam>1</label>
+      <img src="/uploads/<%= product.image1 %>" alt="image-1" style="width: 100px; height: auto; margin: 10px 0;">
+      <input type="file" name="image1">
+      <input type="hidden" name="old_image1" value="<%= product.image1 %>">
+      <a href="javascript:void(0);" onclick="removeImage('image1')">Remove</a>
+    </div>
+    
+
+    <div class="form-group">
+      <label for="image2"><spam class="text-danger">Image</spam><spam> </spam>2</label>
+      <img src="/uploads/<%= product.image2 %>" alt="image-2" style="width: 100px; height: auto; margin: 10px 0;">
+      <input type="file" name="image2">
+      <input type="hidden" name="old_image2" value="<%= product.image2 %>">
+      <a href="javascript:void(0);" onclick="removeImage('image2')">Remove</a>
+    </div>
+    
+
+  
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <% if (typeof success !== 'undefined' && success !== null) { %>
+      <div class="alert alert-danger" role="alert" aria-live="assertive" aria-atomic="true" id="myToast"
+      data-bs-delay="2000">
+  
+  
+          <%= success %>
+      </div>
+  <% } %>
+  </form>
+</div>
+
+ 
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function removeImage(imageName) {
+  const imageElement = document.querySelector(`[name="${imageName}"]`);
+  const hiddenInputElement = document.querySelector(`[name="old_${imageName}"]`);
+  const imgElement = imageElement.previousElementSibling;
+
+  // Clear the input field and hide the image
+  imageElement.value = '';
+  hiddenInputElement.value = '';
+  imgElement.style.display = 'none';
+
+  // Trigger an event to notify the product management page about the change
+  const event = new Event('imageRemoved');
+  document.dispatchEvent(event);
+}
+</script>
+
+<script>
+  const form = document.getElementById('productForm');
+  let isFormSubmitted = false;
+
+  
+    const priceField = document.getElementById('price');
+    const priceError = document.querySelector('.price');
+    if (isNaN(priceField.value) || priceField.value <= 0) {
+      priceError.textContent = 'Price must be a positive number';
+      valid = false;
+    } else {
+      priceError.innerHTML = '<i style="color: green;" class="fa-solid fa-circle-check"></i>';
+    }
+    const imgElement = imageElement.previousElementSibling;
+
+    function removeImage(imageName) {
+    const imageElement = document.querySelector(`[name="${imageName}"]`);
+    const hiddenInputElement = document.querySelector(`[name="old_${imageName}"]`);
+    const imgElement = imageElement.previousElementSibling;
+
+    // Clear the input field and hide the image
+    imageElement.value = '';
+    hiddenInputElement.value = '';
+    imgElement.style.display = 'none';
+
+    // Trigger an event to notify the product management page about the change
+    const event = new Event('imageRemoved');
+    document.dispatchEvent(event);
+
+    // Add this part to send the delete information to the server
+    fetch('/admin/delete-image', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ imageName, productId: '<%= product._id %>' }), // Send the image name and product ID
+    });
+  }
+
+  form.addEventListener('change', function (event) {
+    let valid = true;
+
+    // Validation for the name field
+    // ... (Your existing validation code)
+
+    // Validation for the image1 field
+    const file1 = document.querySelector('input[name="image1"]');
+    const file1Error = document.querySelector('.file1');
+    if (!file1.files[0] && !document.querySelector(`[name="old_image1"]`).value) {
+      file1Error.textContent = 'Image1 is required';
+      valid = false;
+    } else {
+      file1Error.innerHTML = '<i style="color: green;" class="fa-solid fa-circle-check"></i>';
+    }
+
+    
+    
+
+     // Validation for the image2 field
+     const file2 = document.querySelector('input[name="image2"]');
+    const file2Error = document.querySelector('.file2');
+    if (!file2.files[0]) {
+      file2Error.textContent = 'Image2 is required';
+      valid = false;
+    } else {
+      file2Error.innerHTML = '<i style="color: green;" class="fa-solid fa-circle-check"></i>';
+    }
+    
+
+    if (!valid) {
+      event.preventDefault(); // Prevent form submission if there are validation errors.
+    }
+  });
+
+  form.addEventListener('submit', function () {
+    if (!isFormSubmitted) {
+      isFormSubmitted = true;
+
+      // Append alert message when the form is submitted
+      appendAlert('Product has been updated to the Product list.', 'success');
+    }
+  });
+
+  function editProduct(form){
+  Swal.fire({
+  title: 'Saved Changes sucessfully!',
+  text: '',
+  icon: 'success',
+  confirmButtonText: ''
+})
+}
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const myToastElement = document.getElementById('myToast');
+    const myToast = new bootstrap.Toast(myToastElement, {
+      delay: 2000
+    }); // Set delay to 2000ms (2 seconds)
+    myToast.show();
+  });
+</script>
+
+
+

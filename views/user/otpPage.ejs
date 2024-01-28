@@ -1,0 +1,140 @@
+<head>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
+</head>
+<style>
+  .error-message {
+            color: red;
+        }
+</style>
+<% if (typeof error !== 'undefined' && error !== null) { %>
+  <div class="alert alert-danger" role="alert" aria-live="assertive" aria-atomic="true" id="myToast" data-bs-delay="2000">
+    <%= error %>
+  </div>
+<% } %>
+
+      
+
+<div class="body" style="background-color: #f7f7f7; padding: 20px; text-align: center;">
+  
+    <div class="signup-container" style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 400px; margin: 0 auto;">
+        
+      <img  src="https://img.favpng.com/6/3/24/pizza-vs-burger-logo-brand-menu-restaurant-png-favpng-d6x5gZ1qH5Ki59ys2D3bw0U4K.jpg" style="background-color: black;padding-bottom: 10px;" height="70px"; width="90px;    alt="">
+ 
+      <h1 style="font-size: 24px; color: #333; margin-bottom: 20px;"><spam class="text-danger">Sign</spam>Up  </h1>
+        
+        <form action="/verify" method="POST" onsubmit="return validateForm()">
+          
+           
+            <div class="input-container" style="margin-bottom: 20px;">
+              
+                <label for="otp" style="display: block; font-size: 14px; color: #555; margin-bottom: 5px;" placeholder="Enter OTP"><spam class="text-danger">O</spam>TP  </label>
+                <input type="text" id="otp" placeholder="Enter OTP" name="otp" onkeyup="validateOtp()" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;">
+            <div id="otp-error" class="error-message" ></div>
+          </div>
+            <button type="submit" style="background-color:rgb(202, 7, 7); color: #fff; padding: 12px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;" onclick="addToCart()">Sign Up</button>
+            <div class="toast" id="myToast"  aria-live="polite" aria-atomic="true" data-delay="5000" style="background-color: #28a745;">
+              <div role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000ms">
+                  <div class="toast-body">
+                     <h6>SignUp Successfully</h6> 
+                  </div>
+              </div>
+          </div>
+          </form>
+        <div class="text-center mt-4">
+            <span id="verifiBtn">
+              <button disabled="true" class="btn btn-danger border-dark curved" style="width: 40%;">
+                Resend OTP in <span class="timer"></span><span id="counter"></span>
+              </button>
+            </span>
+          </div>
+          
+        
+          <script>
+            function countdown() {
+              let seconds = 59;
+              function tick() {
+                let counter = document.getElementById("counter");
+                seconds--;
+                counter.innerHTML =
+                  "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+                if (seconds > 0) {
+                  setTimeout(tick, 1000);
+                } else {
+                  // Change the button style here
+                  console.log("hello");
+                  const resendBtn = document.getElementById("verifiBtn");
+                  resendBtn.innerHTML = `
+                  <button type="submit" class="btn btn-primary btn-block border-dark curved" onclick="window.location.href='/resendOtp?email=<%= resend%>&name=<%= name %>'"  style="width: 40%;">Resend OTP</button>
+
+         `;
+                  document.getElementById("counter").innerHTML = "";
+                }
+              }
+              tick();
+            }
+            countdown();
+  //           document.addEventListener('DOMContentLoaded', function () {
+  //   const myToastElement = document.getElementById('myToast');
+
+  //   const myToast = new bootstrap.Toast(myToastElement, { delay: 2000 }); // Set delay to 2000ms (2 seconds)
+  //   myToast.show();
+  // });
+          </script>
+          
+          <script>
+            function validateForm() {
+              const otpInput = document.getElementById("otp");
+              const otpError = document.getElementById("otpError");
+              
+              // Check if OTP is not empty and contains only numeric digits
+              const otpPattern = /^(?=.*\d)||(?=.*[a-z])||(?=.*[A-Z]).{6,}$/;;
+          
+              if (!otpInput.value.match(otpPattern) || otpInput.value.length !== 6) {
+                otpError.innerHTML = "Enter a valid 6-digit OTP.";
+                return false;
+              }
+          
+              // Clear the error message if OTP is valid
+              otpError.innerHTML = "";
+          
+              // Continue with form submission
+              return true;
+            }
+            var otpError = document.getElementById("otp-error");
+        function validateOtp() {
+    const otp = document.getElementById('otp').value;
+    const otpError = document.getElementById('otp-error');
+    const otpPattern = /^[a-zA-Z0-9]{6}$/;
+
+    if (!otp.match(otpPattern)) {
+        otpError.innerHTML = "Invalid OTP format (6 digits required)";
+        return false;
+    } else {
+        otpError.innerHTML = ""; // Clear the error message when the OTP is valid
+        return true;
+    }
+}
+
+            </script>
+             <script>
+              // Function to handle adding product to cart and displaying toast
+              function addToCart() {
+                // Perform actions to add the product to the cart here
+                
+                // Display the toast message
+                const myToast = new bootstrap.Toast(document.getElementById('myToast'));
+               ;
+                
+                myToast.show();
+                
+          
+                
+                // Optional: Redirect to the cart or perform other actions after adding to cart
+                // window.location.href = '/cart'; // Redirect to the cart page
+              }
+            </script>
+          
+
+    </div>
+</div>
