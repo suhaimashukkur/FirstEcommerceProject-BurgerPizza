@@ -22,8 +22,8 @@
                 <th style="color: brown;background-color:antiquewhite;">Order ID</th>
                 <th style="color: brown;background-color:antiquewhite;">Purchase Date</th>
                 <th style="color: brown;background-color:antiquewhite;">Total Amount</th>
-                <th style="color: brown;background-color:antiquewhite;">Coupon Code</th>
-                <th style="color: brown;background-color:antiquewhite;">Coupon Discount(%)</th>
+                
+                
 
                 <th style="color: brown;background-color:antiquewhite;">Status</th>
 
@@ -41,8 +41,8 @@
                     <td><%= order._id %></td>
                     <td><%= order.formattedDateOrdered %></td>
                     <td>Rs: <%= order.totalAmount %></td>
-                    <td><%= order.coupon ? order.coupon.couponCode : 'N/A' %></td>
-                    <td><%= order.coupon ? order.coupon.discountPercentage : 'N/A' %></td>
+                    
+                    
                    
                     <td> <%= order.status %></td>
                     <td><a href="/admin/view-order-details-admin/<%= order._id %>" class="btn btn-danger">View Details</a></td>
