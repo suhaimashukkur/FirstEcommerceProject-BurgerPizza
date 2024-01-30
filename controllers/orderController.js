@@ -578,26 +578,21 @@ module.exports.allowReturn = async (req, res) => {
 
    module.exports.invoiceDownload= async (req, res) => {
     try {
-      // const user = await User.find({});
-   
     
       const id = req.body.orderId;
       console.log(id)
-      const address = await Address.findOne({  });
-      const order = await Order.findById(id)
-      .populate('items.product');
-       console.log(order)
-       res.send(order);
-     
-      console.log(order)
+
+      
+        
+      const order = await Order.findById(id).populate('items.product')
+      res.send(order)
+      console.log(order.items + "hloo");
       
   
     } catch (error) {
-      console.log('Try catch error in invoiceDownload  ');
+      console.log('Try catch error in invoiceDownload ');
       console.log(error.message);
     }
   };
-  
-  
   
      
