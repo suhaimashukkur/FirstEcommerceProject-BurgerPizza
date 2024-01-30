@@ -270,90 +270,81 @@
     
 
 
-<script>
     
 
    
+    <script>
     $(document).ready(function () {
-      var orderId = document.getElementById('hidden').value;
-      $('#invoice-button').on('click', function (e) {
-        e.preventDefault();
-    
-        console.log(orderId);
-    
-        $.ajax({
-          type: 'POST',
-          url: '/order-invoice',
-          data: {
-            orderId: orderId
-          },
-          success: function (response) {
-    let order = response;
-    console.log(order);
-    console.log(order.items);
-    let item = []
+        var orderId = document.getElementById('hidden').value;
+        $('#invoice-button').on('click', function (e) {
+            e.preventDefault();
 
-    const products = order.items.map(item => {
-        console.log(item);  // Add this line to check the content of each item
-        return {
-            
-            "quantity": parseInt(item.quantity),
-            "description": item.product.name ,
-            "tax-rate": 0, // You may need to fetch tax rate from somewhere
-            "price": parseInt(item.product.price)
-            
-        };
-        console.log(item.product)
-        item.push(products)
-    });
-            
-            
+            console.log(orderId);
 
-           
-            
-    var data = {
-  "images": {
-    "logo": "https://public.budgetinvoice.com/img/logo_en_original.png",
-  },
-  "sender": {
-    "company": "Sample Corp",
-    // ... other sender details
-  },
-  "client": {
-    "company": order.address.address,
-    "address": order.address.streetAddress,
-    "zip": order.address.postcode,
-    "city": order.address.city,
-    "country": "Kerala"
-  },
-  "information": {
-    "ID": order._id.toString().substring(0, 10),
-    "date": new Date(order.createdAt).toLocaleDateString('en-US')
-  },
-  "product": item, // Make sure this array is correctly populated with item details
-  "bottom-notice": "Kindly pay your invoice within 15 days.",
-  "settings": {
-    "currency": "USD",
-  },
-};
+            $.ajax({
+                type: 'POST',
+                url: '/order-invoice',
+                data: {
+                    orderId: orderId
+                },
+                success: function (order) {
+                    console.log(order);
+                    console.log(order.address);
+                    console.log(order.items);
 
-// Debugging: Log the contents of the data object
-console.log("Data object before generating invoice:", data);
+                    // Format the date using toLocaleDateString
+                    const formattedDate = new Date(order.dateOrdered).toLocaleDateString();
 
-// Generate invoice
-easyinvoice.createInvoice(data, function (result) {
-  easyinvoice.download('myInvoice.pdf', result.pdf);
-});
-          },
-          error: function (error) {
-            console.log(error);
-          },
+                    let products = order.items.map(item => ({
+                        description: item.product.name,
+                        quantity:item.quantity,
+                        price: item.product.price,
+                        tax: 0
+                    }));
+
+                    var data = {
+                        // Your own data
+                        "sender": {
+                            "company": "Sample Corp",
+                            "address": "Sample Street 123",
+                            "zip": "1234 AB",
+                            "city": "Sampletown",
+                            "country": "Samplecountry"
+                        },
+                        // Your recipient
+                        "client": {
+                            "company": order.address.address,
+                            "address": order.address.streetAddress,
+                            "zip": order.address.postcode,
+                            "city": order.address.city,
+                            "country": "Kerala"
+                        },
+                        "information": {
+                            "date": formattedDate
+                        },
+                        // The products you would like to see on your invoice
+                        "products": products,
+                        // The message you would like to display on the bottom of your invoice
+                        "bottomNotice": "Kindly pay your invoice within 15 days.",
+                        // Settings to customize your invoice
+                        "settings": {
+                            "currency": "USD",
+                        },
+                    };
+
+                    console.log("Generating invoice...");
+
+                    easyinvoice.createInvoice(data, function (result) {
+                        easyinvoice.download('myInvoice.pdf', result.pdf);
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
         });
-      });
-    
     });
-    
-   </script>
+</script>
 
 </body>
 </html>
