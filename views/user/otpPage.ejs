@@ -90,7 +90,7 @@
               // Check if OTP is not empty and contains only numeric digits
               const otpPattern = /^(?=.*\d)||(?=.*[a-z])||(?=.*[A-Z]).{6,}$/;;
           
-              if (!otpInput.value.match(otpPattern) || otpInput.value.length !== 6) {
+              if (!otpInput.value.match(otpPattern) || otpInput.value.length !== 6 || otpInput.value.length > 6) {
                 otpError.innerHTML = "Enter a valid 6-digit OTP.";
                 return false;
               }
